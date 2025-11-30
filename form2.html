@@ -1,0 +1,270 @@
+<html lang="en">
+
+<head>
+    <title>Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: black;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 750px;
+        height: 450px;
+        background: transparent;
+        border: 1px solid rgba(236, 58, 58, 0.924);
+        overflow: hidden;
+        box-shadow: 0 0 100px rgba(255, 26, 26, 0.924);
+        border: none;
+
+    }
+
+    .wrapper .form-box {
+        position: absolute;
+        top: 0;
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .wrapper .form-box.login {
+        left: 0;
+        padding: 0 60px 0 40px;
+    }
+
+    .form-box h2 {
+        font-size: 32px;
+        color: white;
+        text-align: center;
+    }
+
+    .form-box .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 25px 0;
+    }
+
+    .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid white;
+        font-size: 16px;
+        font-weight: 500;
+        padding-right: 23px;
+        color: white;
+        transition: 0.5s;
+
+    }
+
+    .input-box .toggle-password {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: #0ef;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .input-box input:focus,
+    .input-box input:valid {
+        border-bottom-color: #0ef;
+    }
+
+    .input-box label {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: white;
+        pointer-events: none;
+        transition: .5s;
+
+    }
+
+    .input-box input:focus~label,
+    .input-box input:valid~label {
+        top: -5px;
+        color: #0ef;
+    }
+
+
+    .btn {
+        position: relative;
+        width: 100%;
+        height: 45px;
+        background: transparent;
+        border: 2px solid #0ef;
+        outline: none;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        color: white;
+        font-weight: 600;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 300%;
+        background: linear-gradient(#081b29, rgba(236, 58, 58, 0.924), #081b29, rgba(236, 58, 58, 0.924));
+        z-index: -1;
+        transition: .5s;
+    }
+
+    .btn:hover::before {
+        top: 0;
+
+    }
+
+    .form-box .logreg-link {
+        font-size: 14.5px;
+        text-align: center;
+        color: white;
+        margin: 20px 0 10px;
+    }
+
+    .logreg-link p a {
+        color: rgba(236, 58, 58, 0.924);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .logreg-link p a :hover {
+        text-decoration: underline;
+    }
+
+    .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 10px 0 18px 0;
+        color: #ccc;
+        font-size: 14px;
+    }
+
+    .error-text {
+        color: #ff6b6b;
+        font-size: 12px;
+        margin-top: 6px;
+        min-height: 14px;
+    }
+
+    .input-box.invalid input {
+        border-bottom-color: #ff6b6b;
+    }
+
+    .wrapper .info-text {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .wrapper .info-text.login {
+        right: 0;
+        text-align: right;
+        padding: 0 40px 60px 150px;
+    }
+
+    .info-text h2 {
+        font-size: 36px;
+        color: white;
+        line-height: 1.3;
+        text-transform: uppercase;
+    }
+
+    .info-text p {
+        font-size: 16px;
+        color: white;
+    }
+
+    .wrapper .bg-animate {
+        position: absolute;
+        top: -4px;
+        right: 0;
+        width: 850px;
+        height: 600px;
+        background: linear-gradient(45deg, #081b29, rgba(236, 58, 58, 0.924));
+        border-bottom: 3px solid rgba(236, 58, 58, 0.924);
+        transform: rotate(10deg) skewY(40deg);
+
+        transform-origin: bottom right;
+
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <span class="bg-animate"></span>
+
+        <div class="form-box login">
+            <h2 data-i18n="auth.loginTitle">Login</h2>
+            <form id="loginForm" novalidate>
+                <div class="input-box" id="usernameBox">
+                    <input id="username" name="username" type="text" autocomplete="username" required data-i18n-placeholder="auth.usernamePlaceholder">
+                    <label for="username" data-i18n="auth.username">Username</label>
+                    <div class="error-text" id="usernameError"></div>
+                </div>
+                <div class="input-box" id="passwordBox">
+                    <input id="password" name="password" type="password" autocomplete="current-password" required data-i18n-placeholder="auth.passwordPlaceholder">
+                    <label for="password" data-i18n="auth.password">Password</label>
+                    <button type="button" class="toggle-password" id="togglePassword">Show</button>
+                    <div class="error-text" id="passwordError"></div>
+                </div>
+                <div class="form-row">
+                    <label><input type="checkbox" id="rememberMe"> <span>Remember me</span></label>
+                    <a href="#" style="color:#0ef">Forgot password?</a>
+                </div>
+                <button class="btn" id="loginSubmit" type="submit" data-i18n="auth.loginButton">Login</button>
+                <div class="logreg-link">
+                    <p><span data-i18n="auth.noAccount">Don't have an account?</span>
+                        <a href="form.html" class="register-link" data-i18n="auth.signupLink">Sign up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="info-text login">
+            <h2 data-i18n="auth.welcome">Welcome Back!</h2>
+            <p data-i18n="auth.welcomeSub">We're happy to see you again.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
